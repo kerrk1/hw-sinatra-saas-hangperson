@@ -6,7 +6,7 @@ class HangpersonApp < Sinatra::Base
 
   enable :sessions
   register Sinatra::Flash
-  
+
   before do
     @game = session[:game] || HangpersonGame.new('')
   end
@@ -40,6 +40,8 @@ class HangpersonApp < Sinatra::Base
   post '/guess' do
     letter = params[:guess].to_s[0]
     ### YOUR CODE HERE ###
+    flash[:message] = "You have already used that letter."
+    flash[:message] = "Invalid guess."
     redirect '/show'
   end
   
